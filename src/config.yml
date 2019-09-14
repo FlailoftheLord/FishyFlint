@@ -1,0 +1,24 @@
+#-----------------------------------------------------------------
+#==================================================================#
+#                                                                  #
+#              FishyFlint by FlailoftheLord.                       #
+#        -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-                   #
+#        For questions please join my discord server:              #
+#               https://discord.gg/wuxW5PS                         #
+#   ______               __        _____                           #
+#   |       |           /  \         |        |                    #
+#   |__     |          /____\        |        |                    #
+#   |       |         /      \       |        |                    #
+#   |       |_____   /        \    __|__      |______              #
+#                                                                  #
+#==================================================================#
+#-----------------------------------------------------------------
+
+# How much durability of the flint & steel should it cost to use.
+DurabilityCost: 1
+
+# Can you ignite players with flint & steel?
+AllowOnPlayers: true
+
+# Time to burn entities in seconds.
+BurnDuration: 8

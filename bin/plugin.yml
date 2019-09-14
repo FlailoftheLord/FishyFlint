@@ -1,0 +1,23 @@
+name: FishyFlint
+main: me.flail.fishyflint.FishyFlint
+author: FlailoftheLord
+description: Flint & Steel do weird things now... 0.o?
+version: 1.0
+api-version: 1.14
+
+commands:
+  
+  fishyflint: 
+    usage: /fishyflint [reload|info]
+    description: use to reload/update the configuration file after changes.
+    aliases: [flint]
+
+permissions:
+  
+  fishyflint.use:
+    default: true
+    description: "permission to use flint on entities, true for all players by default."
+    
+  fishyflint.admin:
+    default: op
+    description: permission to use the command
