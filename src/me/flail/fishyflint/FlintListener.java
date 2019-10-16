@@ -1,6 +1,7 @@
 package me.flail.fishyflint;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -26,7 +27,7 @@ public class FlintListener {
 		item = player.getInventory().getItemInMainHand();
 		offhand = player.getInventory().getItemInOffHand();
 
-		if (target.isValid()) {
+		if (target.isValid() && (target instanceof LivingEntity)) {
 			this.target = (LivingEntity) target;
 		}
 
@@ -40,23 +41,27 @@ public class FlintListener {
 		if (target.isValid()) {
 			if (player.hasPermission("fishyflint.use")) {
 				if (hasFlintInHand()) {
-					if ((target instanceof Player) && !plugin.useOnPlayers) {
+					if (!canIgnite(target)) {
 						return;
 					}
 
-					target.setFireTicks(plugin.burnDuration * 20);
 					if (plugin.cooldowns.contains(player.getUniqueId())) {
 
 						return;
 					}
 
-					subtractDurability(plugin.durabilityCost);
+					target.setFireTicks(plugin.burnDuration * 20);
+
+					if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+						subtractDurability(plugin.durabilityCost);
+					}
+
 					plugin.cooldowns.add(player.getUniqueId());
 
 					Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
 
 						plugin.cooldowns.remove(player.getUniqueId());
-					}, 3L);
+					}, 20L);
 
 				}
 
@@ -91,6 +96,14 @@ public class FlintListener {
 	boolean hasFlintInHand() {
 
 		return item.getType().equals(Material.FLINT_AND_STEEL) || offhand.getType().equals(Material.FLINT_AND_STEEL) ? true : false;
+	}
+
+	boolean canIgnite(LivingEntity entity) {
+		if (entity instanceof Player) {
+			return plugin.useOnPlayers;
+		}
+
+		return true;
 	}
 
 }
